@@ -12,3 +12,6 @@
    > <img width="215" alt="image" src="https://github.com/Thanlee1216/hhplus-concert/assets/97030142/74d4efd4-7671-484a-8bd4-5b62724b7166">
    > <img width="160" alt="image" src="https://github.com/Thanlee1216/hhplus-concert/assets/97030142/395a3dab-6679-4936-b475-a0087871e8fb">
    > <img width="160" alt="image" src="https://github.com/Thanlee1216/hhplus-concert/assets/97030142/0f503d40-aabb-4b25-93b0-7bc7f1d1e7a3">
+   
+### ERD
+   > <img width="800" alt="image" src="https://github.com/Thanlee1216/hhplus-concert/assets/97030142/791a14e1-f5b6-4528-9531-5e9ebd52a4d0">
