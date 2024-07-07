@@ -14,4 +14,4 @@
    > <img width="160" alt="image" src="https://github.com/Thanlee1216/hhplus-concert/assets/97030142/0f503d40-aabb-4b25-93b0-7bc7f1d1e7a3">
    
 ### ERD
-   > <img width="800" alt="image" src="https://github.com/Thanlee1216/hhplus-concert/assets/97030142/316de948-ddc4-4e73-bac2-d8839b2ec0ac">
+   > <img width="800" alt="image" src="https://github.com/Thanlee1216/hhplus-concert/assets/97030142/61f06366-ad89-4138-8370-62b8de639ff4">
