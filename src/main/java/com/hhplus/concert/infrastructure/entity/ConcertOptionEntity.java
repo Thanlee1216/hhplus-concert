@@ -1,6 +1,5 @@
 package com.hhplus.concert.infrastructure.entity;
 
-import com.hhplus.concert.infrastructure.entity.compositekey.ConcertOptionKey;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,13 +10,13 @@ import java.sql.Timestamp;
 @Data
 public class ConcertOptionEntity {
 
-    @EmbeddedId
-    private ConcertOptionKey concertOptionKey;
-
-    @MapsId("concertOptionId")
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "concert_option_id")
     private Long concertOptionId;
+
+    @Column(name = "concert_id")
+    private Long concertId;
 
     @Column(name = "concert_option_name")
     private String concertOptionName;

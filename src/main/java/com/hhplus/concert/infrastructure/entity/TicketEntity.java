@@ -7,9 +7,9 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "concert_ticket")
+@Table(name = "ticket")
 @Data
-public class ConcertTicketEntity {
+public class TicketEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +18,9 @@ public class ConcertTicketEntity {
 
     @Column(name = "user_id")
     private Long userId;
+
+    @Column(name = "reservation_id")
+    private Long reservationId;
 
     @Column(name = "concert_id")
     private Long concertId;
@@ -37,8 +40,8 @@ public class ConcertTicketEntity {
     @Column(name = "seat_id")
     private Long seatId;
 
-    @Column(name = "seat_name")
-    private String seatName;
+    @Column(name = "seat_num")
+    private String seatNum;
 
     @Column(name = "ticket_status")
     private TicketStatusType status;
