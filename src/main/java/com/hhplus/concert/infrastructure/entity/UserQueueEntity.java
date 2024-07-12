@@ -22,8 +22,8 @@ public class UserQueueEntity {
     @Column(name = "created_at")
     private Timestamp createdAt;
 
-    @Column(name = "modified_at")
-    private Timestamp modifiedAt;
+    @Column(name = "active_at")
+    private Timestamp activeAt;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -34,7 +34,7 @@ public class UserQueueEntity {
         this.queueNumber = queueNumber;
         this.userId = userId;
         this.createdAt = createdAt;
-        this.modifiedAt = modifiedAt;
+        this.activeAt = modifiedAt;
         this.status = status;
     }
 

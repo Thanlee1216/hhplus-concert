@@ -16,8 +16,7 @@ public class BalanceApiController {
 
     /**
      * 유저의 포인트를 조회하기 위한 API
-     * @param request
-     * @param user_id
+     * @param userId
      * @return
      */
     @GetMapping("/{user_id}")
@@ -27,7 +26,6 @@ public class BalanceApiController {
 
     /**
      * 유저의 포인트를 충전하기 위한 API
-     * @param request
      * @param requestDTO
      * @return
      */

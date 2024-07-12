@@ -3,7 +3,6 @@ package com.hhplus.concert.application.facade;
 import com.hhplus.concert.application.dto.QueueFacadeDTO;
 import com.hhplus.concert.application.mapper.QueueFacadeMapper;
 import com.hhplus.concert.business.service.QueueService;
-import com.hhplus.concert.business.service.TokenService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,9 +12,6 @@ public class QueueFacade {
 
     @Autowired
     private QueueService queueService;
-
-    @Autowired
-    private TokenService tokenService;
 
     /**
      * 신규 유저 : Insert Queue

@@ -39,4 +39,9 @@ public class UserQueueRepositoryImpl implements UserQueueRepository {
         return jpaRepository.countByQueueNumberLessThanEqualAndStatusEquals(queueNumber, status);
     }
 
+    @Override
+    public Long expiredQueue(QueueStatusType status) {
+        return jpaRepository.expiredQueue(status).longValue();
+    }
+
 }

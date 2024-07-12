@@ -14,4 +14,6 @@ public interface UserQueueRepository {
     QueueDomain update(QueueDomain queueDomain);
 
     Long countByQueueNumberLessThanEqualAndStatusEquals(Long queueNumber, QueueStatusType status);
+
+    Long expiredQueue(QueueStatusType status);
 }

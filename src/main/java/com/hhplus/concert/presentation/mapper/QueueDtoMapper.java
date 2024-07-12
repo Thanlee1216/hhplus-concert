@@ -8,7 +8,7 @@ import com.hhplus.concert.presentation.dto.queue.response.QueueResponseDTO;
 public class QueueDtoMapper {
 
     public static QueueFacadeDTO toQueueFacadeDTO(QueueRequestDTO requestDto) {
-        return new QueueFacadeDTO(requestDto.queueNumber(), requestDto.userId(), null, null);
+        return new QueueFacadeDTO(requestDto.queueNumber(), requestDto.userId(), null, null, null, null);
     }
 
     public static QueueResponseDTO toQueueResponseDTO(QueueFacadeDTO queueFacadeDTO) {
