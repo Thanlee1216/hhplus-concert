@@ -1,10 +1,10 @@
-package com.hhplus.concert.presentation.dto.response;
+package com.hhplus.concert.presentation.dto.balance.response;
 
 import java.sql.Timestamp;
 
 public record BalanceHistoryResponseDTO(
-        long balance_history_id,
-        long amount,
+        Long balance_history_id,
+        Long amount,
         String transaction_type,
         Timestamp transaction_date
 ) {
