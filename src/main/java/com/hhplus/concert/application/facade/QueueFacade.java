@@ -25,6 +25,6 @@ public class QueueFacade {
      */
     @Transactional
     public QueueFacadeDTO queueEntry(QueueFacadeDTO dto) {
-        return QueueFacadeMapper.toQueueFacadeDTO(queueService.queueEntry(QueueFacadeMapper.toQueueDomain(dto)));
+        return null;
     }
 }

@@ -28,7 +28,7 @@ public class ConcertFacade {
      */
     @Transactional
     public List<ConcertFacadeDTO> getDateOfConcertId(Long concertId) {
-        return ConcertFacadeMapper.toConcertFacadeDTOListFromOption(concertService.getConcertOptionList(concertId));
+        return null;
     }
 
     /**
@@ -39,7 +39,7 @@ public class ConcertFacade {
      */
     @Transactional
     public List<ConcertFacadeDTO> getSeatOfConcertIdAndConcertOptionId(Long concertId, Long concertOptionId) {
-        return ConcertFacadeMapper.toConcertFacadeDTOListFromSeat(concertService.getSeatList(concertId, concertOptionId));
+        return null;
     }
 
     /**
@@ -49,9 +49,6 @@ public class ConcertFacade {
      */
     @Transactional
     public ConcertFacadeDTO seatReservation(ConcertFacadeDTO concertFacadeDTO) {
-        ConcertSeatDomain concertSeatDomain = concertService.getSeatInfo(concertFacadeDTO.seatId());
-        concertSeatDomain = concertService.updateSeatStatus(concertSeatDomain.withSeatStatus(ReservationStatusType.RUN));
-        paymentService.createReservation(concertSeatDomain.convertToReservationDomain().withUserId(concertFacadeDTO.userId()));
-        return ConcertFacadeMapper.toConcertFacadeDTO(concertSeatDomain);
+        return null;
     }
 }
