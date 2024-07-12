@@ -16,9 +16,6 @@ import java.util.List;
 public class ConcertService {
 
     @Autowired
-    private ConcertRepository concertRepository;
-
-    @Autowired
     private ConcertOptionRepository concertOptionRepository;
 
     @Autowired
