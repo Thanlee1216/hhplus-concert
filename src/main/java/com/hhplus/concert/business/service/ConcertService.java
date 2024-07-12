@@ -24,10 +24,6 @@ public class ConcertService {
     @Autowired
     private ConcertSeatRepository concertSeatRepository;
 
-    public ConcertDomain getConcertById(Long concertId) {
-        return concertRepository.findById(concertId);
-    }
-
     public List<ConcertOptionDomain> getConcertOptionList(Long concertId) {
         return concertOptionRepository.findByConcertIdAndConcertReservationDateBefore(concertId, new Timestamp(System.currentTimeMillis()));
     }
