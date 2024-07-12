@@ -1,16 +1,18 @@
 package com.hhplus.concert.presentation.controller;
 
-import com.hhplus.concert.presentation.dto.request.BalanceRequestDTO;
-import com.hhplus.concert.presentation.dto.response.BalanceHistoryResponseDTO;
-import com.hhplus.concert.presentation.dto.response.BalanceResponseDTO;
-import jakarta.servlet.http.HttpServletRequest;
+import com.hhplus.concert.application.facade.BalanceFacade;
+import com.hhplus.concert.presentation.dto.balance.request.BalanceRequestDTO;
+import com.hhplus.concert.presentation.dto.balance.response.BalanceResponseDTO;
+import com.hhplus.concert.presentation.mapper.BalanceDtoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/balance")
 public class BalanceApiController {
+
+    @Autowired
+    private BalanceFacade balanceFacade;
 
     /**
      * 유저의 포인트를 조회하기 위한 API
@@ -19,8 +21,8 @@ public class BalanceApiController {
      * @return
      */
     @GetMapping("/{user_id}")
-    public BalanceResponseDTO findBalanceById(HttpServletRequest request, @PathVariable("user_id") Long user_id) {
-        return new BalanceResponseDTO(0L, 0L);
+    public BalanceResponseDTO findBalanceById(@PathVariable("user_id") Long userId) {
+        return BalanceDtoMapper.toBalanceResponseDTO(balanceFacade.findBalanceById(userId));
     }
 
     /**
@@ -30,17 +32,8 @@ public class BalanceApiController {
      * @return
      */
     @PatchMapping("/charge")
-    public BalanceResponseDTO chargeBalance(HttpServletRequest request, @RequestBody BalanceRequestDTO requestDTO) {
-        return new BalanceResponseDTO(0L, 0L);
+    public BalanceResponseDTO chargeBalance(@RequestBody BalanceRequestDTO requestDTO) {
+        return BalanceDtoMapper.toBalanceResponseDTO(balanceFacade.chargeBalance(BalanceDtoMapper.toBalanceFacadeDTO(requestDTO)));
     }
 
-    /**
-     * 유저의 포인트 충전/사용 내역 조회를 위한 API
-     * @param user_id
-     * @return
-     */
-    @GetMapping("/history/{user_id}")
-    public List<BalanceHistoryResponseDTO> balanceHistory(@PathVariable Long user_id) {
-        return List.of();
-    }
 }

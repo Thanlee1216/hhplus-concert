@@ -1,9 +1,12 @@
 package com.hhplus.concert.presentation.controller;
 
-import com.hhplus.concert.presentation.dto.request.PaymentRequestDTO;
-import com.hhplus.concert.presentation.dto.response.PaymentHistoryResponseDTO;
-import com.hhplus.concert.presentation.dto.response.PaymentResponseDTO;
+import com.hhplus.concert.application.facade.PaymentFacade;
+import com.hhplus.concert.presentation.dto.payment.request.PaymentRequestDTO;
+import com.hhplus.concert.presentation.dto.payment.response.PaymentHistoryResponseDTO;
+import com.hhplus.concert.presentation.dto.payment.response.PaymentResponseDTO;
+import com.hhplus.concert.presentation.mapper.PaymentDtoMapper;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,38 +15,17 @@ import java.util.List;
 @RequestMapping(value = "/payment")
 public class PaymentApiController {
 
+    @Autowired
+    private PaymentFacade paymentFacade;
+
     /**
      * 결제 API
-     * @param request
      * @param requestDTO
      * @return
      */
     @PostMapping("")
-    public PaymentResponseDTO payment(HttpServletRequest request, @RequestBody PaymentRequestDTO requestDTO) {
-        return new PaymentResponseDTO(0L, 0L, "");
+    public PaymentResponseDTO payment(@RequestBody PaymentRequestDTO requestDTO) {
+        return PaymentDtoMapper.toPaymentResponseDTO(paymentFacade.payment(PaymentDtoMapper.toPaymentFacadeDTO(requestDTO)));
     }
-
-    /**
-     * 결제 취소 API
-     * @param request
-     * @param requestDTO
-     * @return
-     */
-    @PatchMapping("/cancel")
-    public PaymentResponseDTO paymentCancel(HttpServletRequest request, @RequestBody PaymentRequestDTO requestDTO) {
-        return new PaymentResponseDTO(0L, 0L, "");
-    }
-
-    /**
-     * 결제/취소 내역 조회 API
-     * @param request
-     * @param user_id
-     * @return
-     */
-    @GetMapping("/history/{user_id}")
-    public List<PaymentHistoryResponseDTO> paymentHistory(HttpServletRequest request, @PathVariable Long user_id) {
-        return List.of();
-    }
-
 
 }
