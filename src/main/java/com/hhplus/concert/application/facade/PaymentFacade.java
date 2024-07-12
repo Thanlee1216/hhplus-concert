@@ -31,6 +31,12 @@ public class PaymentFacade {
      */
     @Transactional
     public PaymentFacadeDTO payment(PaymentFacadeDTO facadeDTO) {
-        return null;
+        ReservationDomain reservationDomain = paymentService.refreshReservationTime(PaymentFacadeMapper.toReservationDomain(facadeDTO));
+        TicketDomain ticketDomain = paymentService.getTicketInfo(reservationDomain);
+        PaymentHistoryDomain paymentHistoryDomain = PaymentHistoryDomain.of(ticketDomain);
+        paymentService.insertTicketPayment(ticketDomain.withIdsAndStatus(reservationDomain.userId(), reservationDomain.reservationId(), TicketStatusType.CANCELED), paymentHistoryDomain);
+        paymentService.updateReservationStatus(reservationDomain);
+        concertService.updateSeatStatus(ticketDomain.concertSeatDomain().withSeatStatus(ReservationStatusType.RUN));
+        return PaymentFacadeMapper.toPaymentFacadeDTO(reservationDomain);
     }
 }

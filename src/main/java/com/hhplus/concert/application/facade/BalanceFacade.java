@@ -2,6 +2,7 @@ package com.hhplus.concert.application.facade;
 
 import com.hhplus.concert.application.dto.BalanceFacadeDTO;
 import com.hhplus.concert.application.mapper.BalanceFacadeMapper;
+import com.hhplus.concert.business.constant.BalanceTransactionType;
 import com.hhplus.concert.business.domain.UserDomain;
 import com.hhplus.concert.business.service.BalanceService;
 import jakarta.transaction.Transactional;
@@ -21,7 +22,7 @@ public class BalanceFacade {
      */
     @Transactional
     public BalanceFacadeDTO findBalanceById(Long userId) {
-        return null;
+        return BalanceFacadeMapper.toBalanceFacadeDTO(balanceService.findBalanceById(userId));
     }
 
     /**
@@ -31,6 +32,7 @@ public class BalanceFacade {
      */
     @Transactional
     public BalanceFacadeDTO chargeBalance(BalanceFacadeDTO balanceFacadeDTO) {
-        return null;
+        UserDomain userDomain = balanceService.findBalanceById(balanceFacadeDTO.userId());
+        return BalanceFacadeMapper.toBalanceFacadeDTO(balanceService.updateBalance(userDomain.withBalance(userDomain.balance() + balanceFacadeDTO.amount())));
     }
 }
