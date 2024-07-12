@@ -1,5 +1,6 @@
 package com.hhplus.concert.infrastructure.entity;
 
+import com.hhplus.concert.business.constant.ReservationStatusType;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -26,6 +27,16 @@ public class ConcertSeatEntity {
     private Long seatPrice;
 
     @Column(name = "seat_status")
-    private String seatStatus;
+    @Enumerated(EnumType.STRING)
+    private ReservationStatusType seatStatus;
 
+    public ConcertSeatEntity() {}
+    public ConcertSeatEntity(Long seatId, Long concertId, Long concertOptionId, String seatNum, Long seatPrice, ReservationStatusType seatStatus) {
+        this.seatId = seatId;
+        this.concertId = concertId;
+        this.concertOptionId = concertOptionId;
+        this.seatNum = seatNum;
+        this.seatPrice = seatPrice;
+        this.seatStatus = seatStatus;
+    }
 }

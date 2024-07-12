@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Data
-public class UserEntity {
+public class UsersEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,11 +14,19 @@ public class UserEntity {
     private Long userId;
 
     @Column(name = "customer_id")
-    private Long customerId;
+    private String customerId;
 
     @Column(name = "customer_name")
     private String customerName;
 
     @Column(name = "balance")
     private Long balance;
+
+    public UsersEntity() {}
+    public UsersEntity(Long userId, String customerId, String customerName, Long balance) {
+        this.userId = userId;
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.balance = balance;
+    }
 }

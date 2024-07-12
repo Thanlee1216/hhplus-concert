@@ -1,6 +1,6 @@
 package com.hhplus.concert.infrastructure.entity;
 
-import com.hhplus.concert.global.constant.BalanceTransactionType;
+import com.hhplus.concert.business.constant.BalanceTransactionType;
 import jakarta.persistence.*;
 import lombok.Data;
 

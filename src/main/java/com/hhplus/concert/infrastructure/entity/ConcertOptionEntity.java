@@ -21,9 +21,6 @@ public class ConcertOptionEntity {
     @Column(name = "concert_option_name")
     private String concertOptionName;
 
-    @Column(name = "hall_id")
-    private Long hallId;
-
     @Column(name = "concert_date")
     private Timestamp concertDate;
 

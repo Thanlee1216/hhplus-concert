@@ -1,6 +1,6 @@
 package com.hhplus.concert.infrastructure.entity;
 
-import com.hhplus.concert.global.constant.TicketStatusType;
+import com.hhplus.concert.business.constant.TicketStatusType;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -28,14 +28,14 @@ public class TicketEntity {
     @Column(name = "concert_name")
     private String concertName;
 
-    @Column(name = "concert_date")
-    private Timestamp concertDate;
-
     @Column(name = "concert_option_id")
     private Long concertOptionId;
 
     @Column(name = "concert_option_name")
     private String concertOptionName;
+
+    @Column(name = "concert_date")
+    private Timestamp concertDate;
 
     @Column(name = "seat_id")
     private Long seatId;
@@ -45,5 +45,20 @@ public class TicketEntity {
 
     @Column(name = "ticket_status")
     private TicketStatusType status;
+
+    public TicketEntity() {}
+    public TicketEntity(Long ticketId, Long userId, Long reservationId, Long concertId, String concertName, Long concertOptionId, Timestamp concertDate, Long seatId, String seatNum, TicketStatusType status) {
+        this.ticket_Id = ticketId;
+        this.userId = userId;
+        this.reservationId = reservationId;
+        this.concertId = concertId;
+        this.concertName = concertName;
+        this.concertOptionId = concertOptionId;
+        this.concertOptionName = concertOptionName;
+        this.concertDate = concertDate;
+        this.seatId = seatId;
+        this.seatNum = seatNum;
+        this.status = status;
+    }
 
 }

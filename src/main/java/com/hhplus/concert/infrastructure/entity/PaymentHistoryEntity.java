@@ -1,6 +1,6 @@
 package com.hhplus.concert.infrastructure.entity;
 
-import com.hhplus.concert.global.constant.PaymentTransactionType;
+import com.hhplus.concert.business.constant.PaymentTransactionType;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -31,4 +31,14 @@ public class PaymentHistoryEntity {
 
     @Column(name = "transaction_date")
     private Timestamp transactionDate;
+
+    public PaymentHistoryEntity() {}
+    public PaymentHistoryEntity(Long paymentHistoryId, Long userId, Long ticketId, Long amount, PaymentTransactionType transactionType, Timestamp transactionDate) {
+        this.paymentHistoryId = paymentHistoryId;
+        this.userId = userId;
+        this.ticketId = ticketId;
+        this.amount = amount;
+        this.transactionType = transactionType;
+        this.transactionDate = transactionDate;
+    }
 }

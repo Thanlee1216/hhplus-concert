@@ -1,5 +1,6 @@
 package com.hhplus.concert.infrastructure.entity;
 
+import com.hhplus.concert.business.constant.QueueStatusType;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,5 +26,16 @@ public class UserQueueEntity {
     private Timestamp modifiedAt;
 
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private QueueStatusType status;
+
+    public UserQueueEntity() {}
+    public UserQueueEntity(Long queueNumber, Long userId, Timestamp createdAt, Timestamp modifiedAt, QueueStatusType status) {
+        this.queueNumber = queueNumber;
+        this.userId = userId;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
+        this.status = status;
+    }
+
 }

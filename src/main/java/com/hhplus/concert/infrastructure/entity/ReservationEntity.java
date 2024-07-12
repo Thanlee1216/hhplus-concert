@@ -1,6 +1,6 @@
 package com.hhplus.concert.infrastructure.entity;
 
-import com.hhplus.concert.global.constant.ReservationStatusType;
+import com.hhplus.concert.business.constant.ReservationStatusType;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,6 +15,9 @@ public class ReservationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_id")
     private Long reservationId;
+
+    @Column(name = "user_id")
+    private Long userId;
 
     @Column(name = "concert_id")
     private Long concertId;
@@ -31,5 +34,16 @@ public class ReservationEntity {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private ReservationStatusType status;
+
+    public ReservationEntity() {}
+    public ReservationEntity(Long reservationId, Long userId, Long concertId, Long concertOptionId, Long seatId, Timestamp reservationTime, ReservationStatusType status) {
+        this.reservationId = reservationId;
+        this.userId = userId;
+        this.concertId = concertId;
+        this.concertOptionId = concertOptionId;
+        this.seatId = seatId;
+        this.reservationTime = reservationTime;
+        this.status = status;
+    }
 
 }
