@@ -23,4 +23,12 @@ public class QueueFacade {
     public QueueFacadeDTO queueEntry(QueueFacadeDTO dto) {
         return QueueFacadeMapper.toQueueFacadeDTO(queueService.queueEntry(QueueFacadeMapper.toQueueDomain(dto)));
     }
+
+    /**
+     * 유저 토큰 만료
+     */
+    @Transactional
+    public void expiredQueue() {
+        queueService.expiredQueue();
+    }
 }
