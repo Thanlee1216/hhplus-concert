@@ -21,27 +21,10 @@ public class PaymentService {
     ConcertSeatRepository concertSeatRepository;
 
     @Autowired
-    ReservationRepository reservationRepository;
-
-    @Autowired
     TicketRepository ticketRepository;
 
     @Autowired
     PaymentHistoryRepository paymentHistoryRepository;
-
-    public ReservationDomain createReservation(ReservationDomain reservationDomain) {
-        return reservationRepository.save(reservationDomain);
-    }
-
-    public ReservationDomain updateReservationStatus(ReservationDomain reservationDomain) {
-        return reservationRepository.save(reservationDomain.withStatus(ReservationStatusType.DONE));
-    }
-
-    public ReservationDomain refreshReservationTime(ReservationDomain reservationDomain) {
-        reservationDomain = reservationRepository.findByUserIdAndSeatIdAndStatus(reservationDomain.userId(), reservationDomain.seatId(), ReservationStatusType.RUN);
-        reservationDomain = reservationRepository.save(reservationDomain.withReservationTime(new Timestamp(System.currentTimeMillis())));
-        return reservationDomain;
-    }
 
     public TicketDomain getTicketInfo(ReservationDomain reservationDomain) {
         ConcertDomain concertDomain = concertRepository.findById(reservationDomain.concertId());

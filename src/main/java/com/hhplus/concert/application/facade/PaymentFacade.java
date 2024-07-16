@@ -9,6 +9,7 @@ import com.hhplus.concert.business.domain.ReservationDomain;
 import com.hhplus.concert.business.domain.TicketDomain;
 import com.hhplus.concert.business.service.ConcertService;
 import com.hhplus.concert.business.service.PaymentService;
+import com.hhplus.concert.business.service.ReservationService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,9 @@ public class PaymentFacade {
     @Autowired
     private ConcertService concertService;
 
+    @Autowired
+    private ReservationService reservationService;
+
     /**
      * 결제
      * 결제하다가 예약한 자리 만료되면 안되니 만료 시간 갱신
@@ -31,11 +35,11 @@ public class PaymentFacade {
      */
     @Transactional
     public PaymentFacadeDTO payment(PaymentFacadeDTO facadeDTO) {
-        ReservationDomain reservationDomain = paymentService.refreshReservationTime(PaymentFacadeMapper.toReservationDomain(facadeDTO));
+        ReservationDomain reservationDomain = reservationService.refreshReservationTime(PaymentFacadeMapper.toReservationDomain(facadeDTO));
         TicketDomain ticketDomain = paymentService.getTicketInfo(reservationDomain);
         PaymentHistoryDomain paymentHistoryDomain = PaymentHistoryDomain.of(ticketDomain);
         paymentService.insertTicketPayment(ticketDomain.withIdsAndStatus(reservationDomain.userId(), reservationDomain.reservationId(), TicketStatusType.CANCELED), paymentHistoryDomain);
-        paymentService.updateReservationStatus(reservationDomain);
+        reservationService.updateReservationStatus(reservationDomain);
         concertService.updateSeatStatus(ticketDomain.concertSeatDomain().withSeatStatus(ReservationStatusType.RUN));
         return PaymentFacadeMapper.toPaymentFacadeDTO(reservationDomain);
     }

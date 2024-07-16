@@ -6,6 +6,7 @@ import com.hhplus.concert.business.constant.ReservationStatusType;
 import com.hhplus.concert.business.domain.ConcertSeatDomain;
 import com.hhplus.concert.business.service.ConcertService;
 import com.hhplus.concert.business.service.PaymentService;
+import com.hhplus.concert.business.service.ReservationService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,9 @@ public class ConcertFacade {
 
     @Autowired
     private PaymentService paymentService;
+
+    @Autowired
+    private ReservationService reservationService;
 
     /**
      * 콘서트 예약 가능 날짜 조회
@@ -51,7 +55,7 @@ public class ConcertFacade {
     public ConcertFacadeDTO seatReservation(ConcertFacadeDTO concertFacadeDTO) {
         ConcertSeatDomain concertSeatDomain = concertService.getSeatInfo(concertFacadeDTO.seatId());
         concertSeatDomain = concertService.updateSeatStatus(concertSeatDomain.withSeatStatus(ReservationStatusType.RUN));
-        paymentService.createReservation(concertSeatDomain.convertToReservationDomain().withUserId(concertFacadeDTO.userId()));
+        reservationService.createReservation(concertSeatDomain.convertToReservationDomain().withUserId(concertFacadeDTO.userId()));
         return ConcertFacadeMapper.toConcertFacadeDTO(concertSeatDomain);
     }
 }
