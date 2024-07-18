@@ -2,6 +2,8 @@ server:
   port: 8108
 
 spring:
+  profiles:
+    active: local
   application:
     name: concert
   # H2 Database ??
@@ -27,3 +29,15 @@ spring:
       hibernate:
         format_sql: true      # ?? ?? ?? (??)
         show_sql: true        # ?? ?? ??
+
+
+logging:
+  level:
+    org.springframework.boot.autoconfigure.logging: ERROR
+    org.springframework.web.client.RestTemplate: DEBUG
+    org.springframework.web.servlet: ERROR
+    com.zaxxer.hikari: ERROR
+    org.hibernate: trace
+    org.springframework: ERROR
+    org.apache: ERROR
+  path: ./logs
