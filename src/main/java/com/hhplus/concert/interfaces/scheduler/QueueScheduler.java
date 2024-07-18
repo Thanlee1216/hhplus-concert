@@ -1,20 +1,20 @@
-package com.hhplus.concert.interfaces.scheduled;
+package com.hhplus.concert.interfaces.scheduler;
 
-import com.hhplus.concert.business.service.QueueService;
+import com.hhplus.concert.application.facade.QueueFacade;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class QueueScheduled {
+public class QueueScheduler {
 
     @Autowired
-    QueueService queueService;
+    QueueFacade queueFacade;
 
     @Scheduled(fixedDelay = 30000)
     @Transactional
     public void expiredQueue() {
-        queueService.expiredQueue();
+        queueFacade.expiredQueue();
     }
 }
