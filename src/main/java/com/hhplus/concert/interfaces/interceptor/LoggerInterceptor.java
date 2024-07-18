@@ -23,10 +23,6 @@ public class LoggerInterceptor implements HandlerInterceptor {
         logger.info(" Request URI \t:  " + request.getRequestURI());
         logger.info(" Servlet URL \t:  " + request.getRequestURL());
 
-        if(request.getRequestURI().toUpperCase().equals("/QUEUE")) {
-            logger.info("============== 대기열 체크는 TOKEN 발급 이전이기 때문에 PASS ==============");
-            return true;
-        }
         return tokenFacade.validateToken(request.getHeader(HttpHeaders.AUTHORIZATION));
     }
 
