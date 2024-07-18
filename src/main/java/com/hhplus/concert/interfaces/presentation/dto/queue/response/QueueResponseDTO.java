@@ -6,6 +6,7 @@ public record QueueResponseDTO(
         Long userId,
         Long queueNumber,
         QueueStatusType status,
-        Long userQueueCount
+        Long userQueueCount,
+        String token
 ) {
 }

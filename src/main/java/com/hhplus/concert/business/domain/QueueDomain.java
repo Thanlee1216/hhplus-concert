@@ -10,21 +10,26 @@ public record QueueDomain(
         Timestamp createdAt,
         Timestamp activeAt,
         QueueStatusType status,
-        Long userQueueCount
+        Long userQueueCount,
+        String token
 ) {
     public QueueDomain withStatus(QueueStatusType status) {
-        return new QueueDomain(queueNumber, userId, createdAt, activeAt, status, userQueueCount);
+        return new QueueDomain(queueNumber, userId, createdAt, activeAt, status, userQueueCount, token);
     }
 
     public QueueDomain withCreatedAt(Timestamp createdAt) {
-        return new QueueDomain(queueNumber, userId, createdAt, activeAt, status, userQueueCount);
+        return new QueueDomain(queueNumber, userId, createdAt, activeAt, status, userQueueCount, token);
     }
 
     public QueueDomain withActiveAt(Timestamp activeAt) {
-        return new QueueDomain(queueNumber, userId, createdAt, activeAt, status, userQueueCount);
+        return new QueueDomain(queueNumber, userId, createdAt, activeAt, status, userQueueCount, token);
     }
 
     public QueueDomain withUserQueueCount(Long userQueueCount) {
-        return new QueueDomain(queueNumber, userId, createdAt, activeAt,status, userQueueCount);
+        return new QueueDomain(queueNumber, userId, createdAt, activeAt,status, userQueueCount, token);
+    }
+
+    public QueueDomain withToken(String token) {
+        return new QueueDomain(queueNumber, userId, createdAt, activeAt,status, userQueueCount, token);
     }
 }

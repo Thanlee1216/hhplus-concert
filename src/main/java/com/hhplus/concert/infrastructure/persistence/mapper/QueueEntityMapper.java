@@ -9,11 +9,11 @@ import java.util.Optional;
 public class QueueEntityMapper {
 
     public static QueueDomain toQueueDomain(Optional<UserQueueEntity> entity) {
-        return new QueueDomain(entity.get().getQueueNumber(), entity.get().getUserId(), entity.get().getCreatedAt(), entity.get().getActiveAt(), entity.get().getStatus(), null);
+        return new QueueDomain(entity.get().getQueueNumber(), entity.get().getUserId(), entity.get().getCreatedAt(), entity.get().getActiveAt(), entity.get().getStatus(), null, null);
     }
 
     public static QueueDomain toQueueDomain(UserQueueEntity entity) {
-        return new QueueDomain(entity.getQueueNumber(), entity.getUserId(), entity.getCreatedAt(), entity.getActiveAt(), entity.getStatus(), null);
+        return new QueueDomain(entity.getQueueNumber(), entity.getUserId(), entity.getCreatedAt(), entity.getActiveAt(), entity.getStatus(), null, null);
     }
 
     public static UserQueueEntity toQueueEntity(QueueDomain queueDomain) {

@@ -10,6 +10,7 @@ public record QueueFacadeDTO(
         Timestamp createdAt,
         Timestamp activeAt,
         QueueStatusType status,
-        Long userQueueCount
+        Long userQueueCount,
+        String token
 ) {
 }

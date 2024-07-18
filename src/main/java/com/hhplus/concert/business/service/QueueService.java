@@ -34,7 +34,6 @@ public class QueueService {
         }
     }
 
-    @Scheduled(fixedDelay = 30000)
     @Transactional
     public void expiredQueue() {
         queueRepository.expiredQueue(QueueStatusType.DONE);

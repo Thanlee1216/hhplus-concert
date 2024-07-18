@@ -16,7 +16,7 @@ public class QueueApiController {
     QueueFacade queueFacade;
 
     @PutMapping("/queue")
-    public QueueResponseDTO queueEntry(@RequestBody QueueRequestDTO requestDTO) {
+    public QueueResponseDTO queueEntry(@RequestBody QueueRequestDTO requestDTO) throws Exception {
         return QueueDtoMapper.toQueueResponseDTO(queueFacade.queueEntry(QueueDtoMapper.toQueueFacadeDTO(requestDTO)));
     }
 }
