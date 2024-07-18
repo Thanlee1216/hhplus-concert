@@ -1,4 +1,4 @@
-INSERT INTO users(customer_id, customer_name, balance) VALUES (1, '이태한', 0);
+INSERT INTO users(customer_id, customer_name, balance) VALUES ('testId123', '이태한', 0);
 
 INSERT INTO concert(concert_name, del_yn) VALUES('싸이의 흠뻑쇼', 'N');
 INSERT INTO concert(concert_name, del_yn) VALUES('아이유 콘서트', 'N');
