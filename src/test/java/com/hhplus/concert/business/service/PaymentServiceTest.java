@@ -45,7 +45,7 @@ class PaymentServiceTest {
         ReservationDomain reservationDomain = new ReservationDomain(1L, 1L, 1L, 1L, 1L, new Timestamp(System.currentTimeMillis()), ReservationStatusType.RUN);
         ConcertDomain concertDomain = new ConcertDomain(1L, "Concert");
         ConcertOptionDomain concertOptionDomain = new ConcertOptionDomain(1L, 1L, "Option 1", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()));
-        ConcertSeatDomain concertSeatDomain = new ConcertSeatDomain(1L, 1L, 1L, "A1", 5000L, ReservationStatusType.WAIT);
+        ConcertSeatDomain concertSeatDomain = new ConcertSeatDomain(1L, 1L, 1L, "A1", 5000L, ReservationStatusType.WAIT, 0L);
         TicketDomain ticketDomain = TicketDomain.of(concertDomain, concertOptionDomain, concertSeatDomain);
 
         when(concertRepository.findById(any(Long.class))).thenReturn(concertDomain);

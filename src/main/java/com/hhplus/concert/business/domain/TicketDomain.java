@@ -39,6 +39,6 @@ public record TicketDomain(
     }
 
     public ConcertSeatDomain concertSeatDomain() {
-        return new ConcertSeatDomain(seatId, concertId, concertOptionId, seatNum, seatPrice, null);
+        return new ConcertSeatDomain(seatId, concertId, concertOptionId, seatNum, seatPrice, null, null);
     }
 }

@@ -3,7 +3,6 @@ package com.hhplus.concert.application.mapper;
 import com.hhplus.concert.application.dto.ConcertFacadeDTO;
 import com.hhplus.concert.business.domain.ConcertOptionDomain;
 import com.hhplus.concert.business.domain.ConcertSeatDomain;
-import com.hhplus.concert.business.domain.ReservationDomain;
 
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class ConcertFacadeMapper {
     }
 
     public static ConcertSeatDomain toConcertSeatDomain(ConcertFacadeDTO concertFacadeDTO) {
-        return new ConcertSeatDomain(concertFacadeDTO.seatId(), concertFacadeDTO.concertId(), concertFacadeDTO.concertOptionId(), null, null, null);
+        return new ConcertSeatDomain(concertFacadeDTO.seatId(), concertFacadeDTO.concertId(), concertFacadeDTO.concertOptionId(), null, null, null, null);
     }
 
     public static ConcertFacadeDTO toConcertFacadeDTO(ConcertSeatDomain concertSeatDomain) {

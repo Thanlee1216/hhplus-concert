@@ -30,13 +30,18 @@ public class ConcertSeatEntity {
     @Enumerated(EnumType.STRING)
     private ReservationStatusType seatStatus;
 
+    @Column(name = "version")
+    @Version
+    private Long version;
+
     public ConcertSeatEntity() {}
-    public ConcertSeatEntity(Long seatId, Long concertId, Long concertOptionId, String seatNum, Long seatPrice, ReservationStatusType seatStatus) {
+    public ConcertSeatEntity(Long seatId, Long concertId, Long concertOptionId, String seatNum, Long seatPrice, ReservationStatusType seatStatus, Long version) {
         this.seatId = seatId;
         this.concertId = concertId;
         this.concertOptionId = concertOptionId;
         this.seatNum = seatNum;
         this.seatPrice = seatPrice;
         this.seatStatus = seatStatus;
+        this.version = version;
     }
 }

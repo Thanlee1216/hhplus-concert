@@ -58,8 +58,8 @@ class ConcertServiceTest {
         long concertId = 1L;
         long concertOptionId = 1L;
         List<ConcertSeatDomain> concertSeats = List.of(
-                new ConcertSeatDomain(1L, concertId, concertOptionId, "A1", 5000L, ReservationStatusType.WAIT),
-                new ConcertSeatDomain(2L, concertId, concertOptionId, "A2", 5000L, ReservationStatusType.WAIT)
+                new ConcertSeatDomain(1L, concertId, concertOptionId, "A1", 5000L, ReservationStatusType.WAIT, 0L),
+                new ConcertSeatDomain(2L, concertId, concertOptionId, "A2", 5000L, ReservationStatusType.WAIT, 0L)
         );
         when(concertSeatRepository.findByConcertIdAndConcertOptionId(concertId, concertOptionId))
                 .thenReturn(concertSeats);
@@ -75,7 +75,7 @@ class ConcertServiceTest {
     @Test
     void updateSeatStatus() {
         //given
-        ConcertSeatDomain concertSeatDomain = new ConcertSeatDomain(1L, 1L, 1L, "A1", 5000L, ReservationStatusType.RUN);
+        ConcertSeatDomain concertSeatDomain = new ConcertSeatDomain(1L, 1L, 1L, "A1", 5000L, ReservationStatusType.RUN, 0L);
         when(concertSeatRepository.updateStatus(any(ConcertSeatDomain.class)))
                 .thenReturn(concertSeatDomain);
 
@@ -91,7 +91,7 @@ class ConcertServiceTest {
     void getSeatInfo() {
         //given
         long seatId = 1L;
-        ConcertSeatDomain concertSeatDomain = new ConcertSeatDomain(seatId, 1L, 1L, "A1", 5000L, ReservationStatusType.WAIT);
+        ConcertSeatDomain concertSeatDomain = new ConcertSeatDomain(seatId, 1L, 1L, "A1", 5000L, ReservationStatusType.WAIT, 0L);
         when(concertSeatRepository.findById(seatId)).thenReturn(concertSeatDomain);
 
         //when

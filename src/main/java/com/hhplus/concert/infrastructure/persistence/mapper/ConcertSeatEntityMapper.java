@@ -16,19 +16,20 @@ public class ConcertSeatEntityMapper {
                         entity.getConcertOptionId(),
                         entity.getSeatNum(),
                         entity.getSeatPrice(),
-                        entity.getSeatStatus()
+                        entity.getSeatStatus(),
+                        entity.getVersion()
                 )).toList();
     }
 
     public static ConcertSeatEntity toConcertSeatEntity(ConcertSeatDomain domain) {
-        return new ConcertSeatEntity(domain.seatId(), domain.concertId(), domain.concertOptionId(), domain.seatNum(), domain.seatPrice(), domain.seatStatus());
+        return new ConcertSeatEntity(domain.seatId(), domain.concertId(), domain.concertOptionId(), domain.seatNum(), domain.seatPrice(), domain.seatStatus(), domain.version());
     }
 
     public static ConcertSeatDomain toConcertSeatDomain(Optional<ConcertSeatEntity> entity) {
-        return new ConcertSeatDomain(entity.get().getSeatId(), entity.get().getConcertId(), entity.get().getConcertOptionId(), entity.get().getSeatNum(), entity.get().getSeatPrice(), entity.get().getSeatStatus());
+        return new ConcertSeatDomain(entity.get().getSeatId(), entity.get().getConcertId(), entity.get().getConcertOptionId(), entity.get().getSeatNum(), entity.get().getSeatPrice(), entity.get().getSeatStatus(), entity.get().getVersion());
     }
 
     public static ConcertSeatDomain toConcertSeatDomain(ConcertSeatEntity entity) {
-        return new ConcertSeatDomain(entity.getSeatId(), entity.getConcertId(), entity.getConcertOptionId(), entity.getSeatNum(), entity.getSeatPrice(), entity.getSeatStatus());
+        return new ConcertSeatDomain(entity.getSeatId(), entity.getConcertId(), entity.getConcertOptionId(), entity.getSeatNum(), entity.getSeatPrice(), entity.getSeatStatus(), entity.getVersion());
     }
 }

@@ -10,10 +10,11 @@ public record ConcertSeatDomain(
         Long concertOptionId,
         String seatNum,
         Long seatPrice,
-        ReservationStatusType seatStatus
+        ReservationStatusType seatStatus,
+        Long version
 ) {
     public ConcertSeatDomain withSeatStatus(ReservationStatusType seatStatus) {
-        return new ConcertSeatDomain(seatId, concertId, concertOptionId, seatNum, seatPrice, seatStatus);
+        return new ConcertSeatDomain(seatId, concertId, concertOptionId, seatNum, seatPrice, seatStatus, version);
     }
 
     public ReservationDomain convertToReservationDomain() {
