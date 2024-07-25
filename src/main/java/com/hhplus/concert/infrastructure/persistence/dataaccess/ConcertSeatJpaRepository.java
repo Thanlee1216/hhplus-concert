@@ -6,11 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ConcertSeatJpaRepository extends JpaRepository<ConcertSeatEntity, Long> {
     List<ConcertSeatEntity> findByConcertIdAndConcertOptionId(Long concertId, Long concertOptionId);
 
     @Override
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    <S extends ConcertSeatEntity> S save(S entity);
+    Optional<ConcertSeatEntity> findById(Long aLong);
 }
