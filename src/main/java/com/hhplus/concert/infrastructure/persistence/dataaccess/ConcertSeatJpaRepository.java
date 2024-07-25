@@ -12,6 +12,6 @@ public interface ConcertSeatJpaRepository extends JpaRepository<ConcertSeatEntit
     List<ConcertSeatEntity> findByConcertIdAndConcertOptionId(Long concertId, Long concertOptionId);
 
     @Override
-    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Lock(LockModeType.PESSIMISTIC_READ)
     Optional<ConcertSeatEntity> findById(Long aLong);
 }

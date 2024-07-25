@@ -5,22 +5,21 @@ import com.hhplus.concert.application.mapper.ConcertFacadeMapper;
 import com.hhplus.concert.business.constant.ReservationStatusType;
 import com.hhplus.concert.business.domain.ConcertSeatDomain;
 import com.hhplus.concert.business.service.ConcertService;
-import com.hhplus.concert.business.service.PaymentService;
 import com.hhplus.concert.business.service.ReservationService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Component
 public class ConcertFacade {
 
-    @Autowired
-    private ConcertService concertService;
+    private final Logger logger = Logger.getLogger(ConcertFacade.class.getName());
 
     @Autowired
-    private PaymentService paymentService;
+    private ConcertService concertService;
 
     @Autowired
     private ReservationService reservationService;
@@ -53,7 +52,14 @@ public class ConcertFacade {
      */
     @Transactional
     public ConcertFacadeDTO seatReservation(ConcertFacadeDTO concertFacadeDTO) {
-        ConcertSeatDomain concertSeatDomain = concertService.getSeatInfo(concertFacadeDTO.seatId());
+        ConcertSeatDomain concertSeatDomain = null;
+        try {
+            concertSeatDomain = concertService.getSeatInfo(concertFacadeDTO.seatId()); //LockModeType.PESSIMISTIC_READ를 걸었는데
+            logger.info("Select는 완료");//왜 얘도 실행 안하고 기다릴까요?
+            Thread.sleep(10000);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         concertSeatDomain = concertService.updateSeatStatus(concertSeatDomain.withSeatStatus(ReservationStatusType.RUN));
         reservationService.createReservation(concertSeatDomain.convertToReservationDomain().withUserId(concertFacadeDTO.userId()));
         return ConcertFacadeMapper.toConcertFacadeDTO(concertSeatDomain);
