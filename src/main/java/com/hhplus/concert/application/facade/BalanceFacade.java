@@ -30,9 +30,7 @@ public class BalanceFacade {
      * @param balanceFacadeDTO
      * @return
      */
-    @Transactional
     public BalanceFacadeDTO chargeBalance(BalanceFacadeDTO balanceFacadeDTO) {
-        UserDomain userDomain = balanceService.findBalanceById(balanceFacadeDTO.userId());
-        return BalanceFacadeMapper.toBalanceFacadeDTO(balanceService.updateBalance(userDomain.withBalance(userDomain.balance() + balanceFacadeDTO.amount())));
+        return BalanceFacadeMapper.toBalanceFacadeDTO(balanceService.updateBalance(balanceFacadeDTO.userId(), balanceFacadeDTO.amount()));
     }
 }
