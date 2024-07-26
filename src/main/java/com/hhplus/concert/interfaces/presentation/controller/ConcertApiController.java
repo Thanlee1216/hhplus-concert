@@ -44,7 +44,7 @@ public class ConcertApiController {
      * @return
      */
     @PutMapping("/reservation")
-    public ConcertSeatResponseDTO seatReservation(@RequestBody ConcertReservationRequestDTO requestDTO) {
+    public ConcertSeatResponseDTO seatReservation(@RequestBody ConcertReservationRequestDTO requestDTO) throws Exception{
         return ConcertDtoMapper.toConcertSeatResponseDTO(concertFacade.seatReservation(ConcertDtoMapper.toConcertFacadeDTO(requestDTO)));
     }
 }

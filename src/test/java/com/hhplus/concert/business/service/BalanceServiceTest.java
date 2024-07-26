@@ -56,15 +56,21 @@ class BalanceServiceTest {
     @Test
     void updateBalance() {
         //given
-        UserDomain userDomain = new UserDomain(1L, "customer1", "Customer One", 2000L);
-        when(userRepository.save(any(UserDomain.class))).thenReturn(userDomain);
+        Long userId = 1L;
+        Long initialBalance = 2000L;
+        Long amountToAdd = 1000L;
+        Long expectedBalance = initialBalance + amountToAdd;
+
+        UserDomain userDomain = new UserDomain(userId, "customer1", "Customer One", initialBalance);
+        when(userRepository.findById(userId)).thenReturn(userDomain);
+        when(userRepository.save(any(UserDomain.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         //when
-        UserDomain result = balanceService.updateBalance(userDomain);
+        UserDomain result = balanceService.updateBalance(userId, amountToAdd);
 
         //then
-        assertThat(result.userId()).isEqualTo(1L);
-        assertThat(result.balance()).isEqualTo(2000L);
+        assertThat(result.userId()).isEqualTo(userId);
+        assertThat(result.balance()).isEqualTo(expectedBalance);
     }
 
 }

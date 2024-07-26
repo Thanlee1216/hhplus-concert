@@ -29,7 +29,7 @@ class QueueServiceTest {
     @Test
     void queueEntry_NewEntry() {
         //given
-        QueueDomain queueDomain = new QueueDomain(1L, 1L, null, null, null, null);
+        QueueDomain queueDomain = new QueueDomain(1L, 1L, null, null, null, null, null);
         QueueDomain insertedQueueDomain = queueDomain.withStatus(QueueStatusType.WAIT).withCreatedAt(new Timestamp(System.currentTimeMillis()));
 
         when(queueRepository.insert(any(QueueDomain.class))).thenReturn(insertedQueueDomain);
@@ -53,7 +53,7 @@ class QueueServiceTest {
     @Test
     void queueEntry_UpdateEntry() {
         //given
-        QueueDomain queueDomain = new QueueDomain(1L, 1L, null, null, QueueStatusType.WAIT, 1L);
+        QueueDomain queueDomain = new QueueDomain(1L, 1L, null, null, QueueStatusType.WAIT, 1L, null);
 
         when(queueRepository.countByStatus(QueueStatusType.RUN)).thenReturn(1L);
         when(queueRepository.countByQueueNumberLessThanEqualAndStatusEquals(anyLong(), any(QueueStatusType.class))).thenReturn(1L);
@@ -72,7 +72,7 @@ class QueueServiceTest {
     @Test
     void queueEntry_NotActivated() {
         //given
-        QueueDomain queueDomain = new QueueDomain(1L, 1L, null, null, QueueStatusType.WAIT, 1L);
+        QueueDomain queueDomain = new QueueDomain(1L, 1L, null, null, QueueStatusType.WAIT, 1L, null);
 
         when(queueRepository.countByStatus(QueueStatusType.RUN)).thenReturn(5L);
         when(queueRepository.countByQueueNumberLessThanEqualAndStatusEquals(anyLong(), any(QueueStatusType.class))).thenReturn(6L);
