@@ -52,8 +52,11 @@ public class ConcertFacade {
      * @return
      */
     @Transactional
-    public ConcertFacadeDTO seatReservation(ConcertFacadeDTO concertFacadeDTO) {
+    public ConcertFacadeDTO seatReservation(ConcertFacadeDTO concertFacadeDTO) throws Exception {
         ConcertSeatDomain concertSeatDomain = concertService.getSeatInfo(concertFacadeDTO.seatId());
+        if(concertSeatDomain.seatStatus() != ReservationStatusType.WAIT) {
+            throw new Exception("이미 선택된 좌석입니다.");
+        }
         concertSeatDomain = concertService.updateSeatStatus(concertSeatDomain.withSeatStatus(ReservationStatusType.RUN));
         reservationService.createReservation(concertSeatDomain.convertToReservationDomain().withUserId(concertFacadeDTO.userId()));
         return ConcertFacadeMapper.toConcertFacadeDTO(concertSeatDomain);
