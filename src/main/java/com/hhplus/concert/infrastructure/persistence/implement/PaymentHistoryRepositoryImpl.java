@@ -2,7 +2,7 @@ package com.hhplus.concert.infrastructure.persistence.implement;
 
 import com.hhplus.concert.business.domain.PaymentHistoryDomain;
 import com.hhplus.concert.business.repository.PaymentHistoryRepository;
-import com.hhplus.concert.infrastructure.persistence.dataaccess.PaymentHistoryJpaRepository;
+import com.hhplus.concert.infrastructure.persistence.dataaccess.jpa.PaymentHistoryJpaRepository;
 import com.hhplus.concert.infrastructure.persistence.mapper.PaymentHistoryEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

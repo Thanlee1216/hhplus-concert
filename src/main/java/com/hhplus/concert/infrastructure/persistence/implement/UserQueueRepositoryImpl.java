@@ -3,7 +3,7 @@ package com.hhplus.concert.infrastructure.persistence.implement;
 import com.hhplus.concert.business.constant.QueueStatusType;
 import com.hhplus.concert.business.domain.QueueDomain;
 import com.hhplus.concert.business.repository.UserQueueRepository;
-import com.hhplus.concert.infrastructure.persistence.dataaccess.UserQueueJpaRepository;
+import com.hhplus.concert.infrastructure.persistence.dataaccess.jpa.UserQueueJpaRepository;
 import com.hhplus.concert.infrastructure.persistence.mapper.QueueEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

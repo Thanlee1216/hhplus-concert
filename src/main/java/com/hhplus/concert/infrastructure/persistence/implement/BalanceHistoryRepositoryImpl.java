@@ -1,7 +1,7 @@
 package com.hhplus.concert.infrastructure.persistence.implement;
 
 import com.hhplus.concert.business.repository.BalanceHistoryRepository;
-import com.hhplus.concert.infrastructure.persistence.dataaccess.BalanceHistoryJpaRepository;
+import com.hhplus.concert.infrastructure.persistence.dataaccess.jpa.BalanceHistoryJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

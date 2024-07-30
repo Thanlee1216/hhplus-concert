@@ -3,7 +3,7 @@ package com.hhplus.concert.infrastructure.persistence.implement;
 import com.hhplus.concert.business.constant.ReservationStatusType;
 import com.hhplus.concert.business.domain.ReservationDomain;
 import com.hhplus.concert.business.repository.ReservationRepository;
-import com.hhplus.concert.infrastructure.persistence.dataaccess.ReservationJpaRepository;
+import com.hhplus.concert.infrastructure.persistence.dataaccess.jpa.ReservationJpaRepository;
 import com.hhplus.concert.infrastructure.persistence.mapper.ReservationEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
