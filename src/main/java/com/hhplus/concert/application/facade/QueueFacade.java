@@ -30,20 +30,21 @@ public class QueueFacade {
      * @param dto
      * @return
      */
-    @Transactional
     public QueueFacadeDTO queueEntry(QueueFacadeDTO dto) throws Exception {
-        QueueDomain queueDomain = queueService.queueEntry(QueueFacadeMapper.toQueueDomain(dto));
-        UserDomain userDomain = userService.findUserById(queueDomain.userId());
-        if(queueDomain.status().equals(QueueStatusType.RUN)) {
-            return QueueFacadeMapper.toQueueFacadeDTO(queueDomain.withToken(tokenService.createToken(userDomain)));
+        if(dto.token() == null) {
+            UserDomain userDomain = userService.findUserById(dto.userId());
+            dto = dto.withToken(tokenService.createToken(userDomain));
         }
         return QueueFacadeMapper.toQueueFacadeDTO(queueService.queueEntry(QueueFacadeMapper.toQueueDomain(dto)));
+    }
+
+    public boolean checkActiveToken(String token) {
+        return queueService.checkActiveToken(token);
     }
 
     /**
      * 유저 대기열 만료
      */
-    @Transactional
     public void expiredQueue() {
         queueService.expiredQueue();
     }
