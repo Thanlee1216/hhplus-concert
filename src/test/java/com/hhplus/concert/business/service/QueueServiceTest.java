@@ -1,98 +1,106 @@
 package com.hhplus.concert.business.service;
 
-import com.hhplus.concert.business.constant.QueueStatusType;
 import com.hhplus.concert.business.domain.QueueDomain;
-import com.hhplus.concert.business.repository.UserQueueRepository;
+import com.hhplus.concert.global.exception.JwtException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SetOperations;
+import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.test.context.ActiveProfiles;
 
-import java.sql.Timestamp;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class QueueServiceTest {
 
-    @InjectMocks
-    QueueService queueService;
+    private static final String ACTIVE_TOKEN_KEY = "activeToken";
+    private static final String WAIT_TOKEN_KEY = "waitToken";
 
-    @Mock
-    UserQueueRepository queueRepository;
+    @Autowired
+    private QueueService queueService;
+
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
+    @AfterEach
+    void tearDown() {
+        // 테스트 후 Redis 데이터를 정리합니다.
+        redisTemplate.delete(ACTIVE_TOKEN_KEY);
+        redisTemplate.delete(WAIT_TOKEN_KEY);
+    }
 
     @DisplayName("대기열 생성 테스트")
     @Test
     void queueEntry_NewEntry() {
         //given
-        QueueDomain queueDomain = new QueueDomain(1L, 1L, null, null, null, null);
-        QueueDomain insertedQueueDomain = queueDomain.withStatus(QueueStatusType.WAIT).withCreatedAt(new Timestamp(System.currentTimeMillis()));
-
-        when(queueRepository.insert(any(QueueDomain.class))).thenReturn(insertedQueueDomain);
-        when(queueRepository.countByStatus(QueueStatusType.RUN)).thenReturn(0L);
-        when(queueRepository.countByQueueNumberLessThanEqualAndStatusEquals(anyLong(), any(QueueStatusType.class))).thenReturn(1L);
-
-        QueueDomain updatedQueueDomain = insertedQueueDomain.withStatus(QueueStatusType.RUN).withActiveAt(new Timestamp(System.currentTimeMillis()));
-        when(queueRepository.update(any(QueueDomain.class))).thenReturn(updatedQueueDomain);
+        QueueDomain queueDomain = new QueueDomain(1L, null, "token");
 
         //when
         QueueDomain result = queueService.queueEntry(queueDomain);
 
         //then
         assertThat(result).isNotNull();
-        assertThat(result.status()).isEqualTo(QueueStatusType.RUN);
-        verify(queueRepository, times(1)).insert(any(QueueDomain.class));
-        verify(queueRepository, times(1)).update(any(QueueDomain.class));
+        assertThat(result.userQueueCount()).isEqualTo(0L);
     }
 
-    @DisplayName("대기열 업데이트 테스트")
+    @DisplayName("토큰이 없는 경우 예외 발생 테스트")
     @Test
-    void queueEntry_UpdateEntry() {
+    void queueEntry_NoToken() {
         //given
-        QueueDomain queueDomain = new QueueDomain(1L, 1L, null, null, QueueStatusType.WAIT, 1L);
-
-        when(queueRepository.countByStatus(QueueStatusType.RUN)).thenReturn(1L);
-        when(queueRepository.countByQueueNumberLessThanEqualAndStatusEquals(anyLong(), any(QueueStatusType.class))).thenReturn(1L);
-        when(queueRepository.update(any(QueueDomain.class))).thenReturn(queueDomain.withStatus(QueueStatusType.RUN).withActiveAt(new Timestamp(System.currentTimeMillis())));
+        QueueDomain queueDomain = new QueueDomain(1L, null, null);
 
         //when
-        QueueDomain result = queueService.queueEntry(queueDomain);
+        JwtException exception = assertThrows(JwtException.class, () -> queueService.queueEntry(queueDomain));
 
         //then
-        assertThat(result).isNotNull();
-        assertThat(result.status()).isEqualTo(QueueStatusType.RUN);
-        verify(queueRepository, times(1)).update(any(QueueDomain.class));
+        assertThat(exception).isNotNull();
+        assertThat(exception.getMessage()).isEqualTo("Empty token");
     }
 
     @DisplayName("대기열을 활성화할 수 없는 경우 테스트")
     @Test
     void queueEntry_NotActivated() {
-        //given
-        QueueDomain queueDomain = new QueueDomain(1L, 1L, null, null, QueueStatusType.WAIT, 1L);
+        QueueDomain queueDomain = new QueueDomain(1L, null, "token");
+        SetOperations<String, Object> setOperations = redisTemplate.opsForSet();
+        ZSetOperations<String, Object> zSetOperations = redisTemplate.opsForZSet();
+        setOperations.add(ACTIVE_TOKEN_KEY, "token1:" + System.currentTimeMillis());
+        setOperations.add(ACTIVE_TOKEN_KEY, "token2:" + System.currentTimeMillis());
+        setOperations.add(ACTIVE_TOKEN_KEY, "token3:" + System.currentTimeMillis());
+        setOperations.add(ACTIVE_TOKEN_KEY, "token4:" + System.currentTimeMillis());
+        setOperations.add(ACTIVE_TOKEN_KEY, "token5:" + System.currentTimeMillis());
 
-        when(queueRepository.countByStatus(QueueStatusType.RUN)).thenReturn(5L);
-        when(queueRepository.countByQueueNumberLessThanEqualAndStatusEquals(anyLong(), any(QueueStatusType.class))).thenReturn(6L);
+        zSetOperations.add(WAIT_TOKEN_KEY, "token", System.currentTimeMillis());
+        zSetOperations.add(WAIT_TOKEN_KEY, "token6", System.currentTimeMillis() - 1);
 
-        //when
         QueueDomain result = queueService.queueEntry(queueDomain);
 
-        //then
         assertThat(result).isNotNull();
-        assertThat(result.status()).isEqualTo(QueueStatusType.WAIT);
-        verify(queueRepository, never()).update(any(QueueDomain.class));
+        assertThat(result.userQueueCount()).isEqualTo(1L);
+        assertThat(setOperations.isMember(ACTIVE_TOKEN_KEY, "token")).isFalse();
+        assertThat(zSetOperations.rank(WAIT_TOKEN_KEY, "token")).isNotNull();
     }
 
     @DisplayName("만료된 큐를 처리하는 테스트")
     @Test
     void expiredQueue() {
+        //given
+        Long currentTime = System.currentTimeMillis();
+        SetOperations<String, Object> setOperations = redisTemplate.opsForSet();
+        setOperations.add(ACTIVE_TOKEN_KEY, "token1:" + (currentTime - 700000L));
+        setOperations.add(ACTIVE_TOKEN_KEY, "token2:" + currentTime);
+
         //when
         queueService.expiredQueue();
 
         //then
-        verify(queueRepository, times(1)).expiredQueue(QueueStatusType.DONE);
+        assertThat(setOperations.isMember(ACTIVE_TOKEN_KEY, "token1:" + (currentTime - 700000L))).isFalse();
+        assertThat(setOperations.isMember(ACTIVE_TOKEN_KEY, "token2:" + currentTime)).isTrue();
     }
 }
