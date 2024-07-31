@@ -30,9 +30,14 @@ public class ConcertFacade {
      * @param concertId
      * @return
      */
-    @Transactional
     public List<ConcertFacadeDTO> getDateOfConcertId(Long concertId) {
-        return ConcertFacadeMapper.toConcertFacadeDTOListFromOption(concertService.getConcertOptionList(concertId));
+        try {
+            return ConcertFacadeMapper.toConcertFacadeDTOListFromOption(concertService.getConcertOptionList(concertId));
+        }catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("");
+        }
+        return null;
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.hhplus.concert.business.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 public record ConcertOptionDomain(
@@ -8,5 +9,5 @@ public record ConcertOptionDomain(
         String concertOptionName,
         Timestamp concertDate,
         Timestamp concertReservationDate
-) {
+) implements Serializable {
 }
