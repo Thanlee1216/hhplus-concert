@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface ConcertOptionRepository {
-    List<ConcertOptionDomain> findByConcertIdAndConcertReservationDateBefore(Long concertId, Timestamp timestamp);
+    List<ConcertOptionDomain> findByConcertIdAndConcertReservationDateBefore(Long concertId, Long timestamp);
 
     ConcertOptionDomain findByConcertIdAndConcertOptionId(Long concertId, Long concertOptionId);
 }

@@ -22,10 +22,10 @@ public class ConcertOptionEntity {
     private String concertOptionName;
 
     @Column(name = "concert_date")
-    private Timestamp concertDate;
+    private Long concertDate;
 
     @Column(name = "concert_reservation_date")
-    private Timestamp concertReservationDate;
+    private Long concertReservationDate;
 
     @Column(name = "del_yn")
     private String delYn;
