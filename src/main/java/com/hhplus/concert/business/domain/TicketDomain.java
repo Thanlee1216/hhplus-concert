@@ -12,7 +12,7 @@ public record TicketDomain(
         String concertName,
         Long concertOptionId,
         String concertOptionName,
-        Timestamp concertDate,
+        Long concertDate,
         Long seatId,
         String seatNum,
         Long seatPrice,

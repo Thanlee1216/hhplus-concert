@@ -17,7 +17,7 @@ public class ConcertOptionRepositoryImpl implements ConcertOptionRepository {
     private final ConcertOptionJpaRepository jpaRepository;
 
     @Override
-    public List<ConcertOptionDomain> findByConcertIdAndConcertReservationDateBefore(Long concertId, Timestamp timestamp) {
+    public List<ConcertOptionDomain> findByConcertIdAndConcertReservationDateBefore(Long concertId, Long timestamp) {
         return ConcertOptionEntityMapper.toConcertOptionDomainList(jpaRepository.findByConcertIdAndConcertReservationDateBefore(concertId, timestamp));
     }
 

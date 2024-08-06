@@ -6,10 +6,10 @@ import com.hhplus.concert.business.domain.QueueDomain;
 public class QueueFacadeMapper {
 
     public static QueueDomain toQueueDomain(QueueFacadeDTO facadeDTO) {
-        return new QueueDomain(facadeDTO.queueNumber(), facadeDTO.userId(), facadeDTO.createdAt(), facadeDTO.activeAt(), facadeDTO.status(), facadeDTO.userQueueCount(), facadeDTO.token());
+        return new QueueDomain(facadeDTO.userId(), facadeDTO.userQueueCount(), facadeDTO.token());
     }
 
     public static QueueFacadeDTO toQueueFacadeDTO(QueueDomain queueDomain) {
-        return new QueueFacadeDTO(queueDomain.queueNumber(), queueDomain.userId(), queueDomain.createdAt(), queueDomain.activeAt(), queueDomain.status(), queueDomain.userQueueCount(), queueDomain.token());
+        return new QueueFacadeDTO(queueDomain.userId(), queueDomain.userQueueCount(), queueDomain.token());
     }
 }

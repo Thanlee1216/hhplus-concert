@@ -5,6 +5,7 @@ import com.hhplus.concert.business.domain.ConcertOptionDomain;
 import com.hhplus.concert.business.domain.ConcertSeatDomain;
 import com.hhplus.concert.business.domain.ReservationDomain;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class ConcertFacadeMapper {
@@ -17,8 +18,8 @@ public class ConcertFacadeMapper {
                         null,
                         concertOptionDomain.concertOptionId(),
                         concertOptionDomain.concertOptionName(),
-                        concertOptionDomain.concertDate(),
-                        concertOptionDomain.concertReservationDate(),
+                        new Timestamp(concertOptionDomain.concertDate()),
+                        new Timestamp(concertOptionDomain.concertReservationDate()),
                         null,
                         null,
                         null,

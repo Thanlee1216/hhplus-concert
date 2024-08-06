@@ -6,7 +6,7 @@ public record ConcertOptionDomain(
         Long concertid,
         Long concertOptionId,
         String concertOptionName,
-        Timestamp concertDate,
-        Timestamp concertReservationDate
+        Long concertDate,
+        Long concertReservationDate
 ) {
 }
