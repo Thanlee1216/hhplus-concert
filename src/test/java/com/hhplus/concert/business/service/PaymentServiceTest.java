@@ -44,7 +44,7 @@ class PaymentServiceTest {
         //given
         ReservationDomain reservationDomain = new ReservationDomain(1L, 1L, 1L, 1L, 1L, new Timestamp(System.currentTimeMillis()), ReservationStatusType.RUN);
         ConcertDomain concertDomain = new ConcertDomain(1L, "Concert");
-        ConcertOptionDomain concertOptionDomain = new ConcertOptionDomain(1L, 1L, "Option 1", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()));
+        ConcertOptionDomain concertOptionDomain = new ConcertOptionDomain(1L, 1L, "Option 1", System.currentTimeMillis(), System.currentTimeMillis());
         ConcertSeatDomain concertSeatDomain = new ConcertSeatDomain(1L, 1L, 1L, "A1", 5000L, ReservationStatusType.WAIT);
         TicketDomain ticketDomain = TicketDomain.of(concertDomain, concertOptionDomain, concertSeatDomain);
 
@@ -63,7 +63,7 @@ class PaymentServiceTest {
     @Test
     void insertTicketPayment() {
         //given
-        TicketDomain ticketDomain = new TicketDomain(1L, 1L, 1L, 1L, "Concert", 1L, "Option 1", new Timestamp(System.currentTimeMillis()), 1L, "A1", 5000L, TicketStatusType.COMPLETED);
+        TicketDomain ticketDomain = new TicketDomain(1L, 1L, 1L, 1L, "Concert", 1L, "Option 1", System.currentTimeMillis(), 1L, "A1", 5000L, TicketStatusType.COMPLETED);
         PaymentHistoryDomain paymentHistoryDomain = new PaymentHistoryDomain(1L, 1L, 1L, 5000L, null, new Timestamp(System.currentTimeMillis()));
         when(paymentHistoryRepository.insertHistory(any(PaymentHistoryDomain.class))).thenReturn(paymentHistoryDomain);
         when(ticketRepository.insertTicket(any(TicketDomain.class))).thenReturn(ticketDomain);

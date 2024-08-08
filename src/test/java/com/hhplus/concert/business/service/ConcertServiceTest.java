@@ -38,10 +38,10 @@ class ConcertServiceTest {
         //given
         long concertId = 1L;
         List<ConcertOptionDomain> concertOptions = List.of(
-                new ConcertOptionDomain(concertId, 1L, "Option 1", new Timestamp(System.currentTimeMillis() - 1000L), new Timestamp(System.currentTimeMillis() - 1000L)),
-                new ConcertOptionDomain(concertId, 2L, "Option 2", new Timestamp(System.currentTimeMillis() - 2000L), new Timestamp(System.currentTimeMillis() - 2000L))
+                new ConcertOptionDomain(concertId, 1L, "Option 1", System.currentTimeMillis() - 1000L, System.currentTimeMillis() - 1000L),
+                new ConcertOptionDomain(concertId, 2L, "Option 2", System.currentTimeMillis() - 2000L, System.currentTimeMillis() - 2000L)
         );
-        when(concertOptionRepository.findByConcertIdAndConcertReservationDateBefore(anyLong(), any(Timestamp.class)))
+        when(concertOptionRepository.findByConcertIdAndConcertReservationDateBefore(anyLong(), any(Long.class)))
                 .thenReturn(concertOptions);
 
         //when
