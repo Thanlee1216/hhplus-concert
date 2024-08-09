@@ -1,6 +1,8 @@
 package com.hhplus.concert.application.facade;
 
 import com.hhplus.concert.application.dto.BalanceFacadeDTO;
+import com.hhplus.concert.application.event.BalanceEventPublisher;
+import com.hhplus.concert.application.event.BalanceSuccessEvent;
 import com.hhplus.concert.application.mapper.BalanceFacadeMapper;
 import com.hhplus.concert.business.constant.BalanceTransactionType;
 import com.hhplus.concert.business.domain.UserDomain;
@@ -14,6 +16,9 @@ public class BalanceFacade {
 
     @Autowired
     private BalanceService balanceService;
+
+    @Autowired
+    BalanceEventPublisher balanceEventPublisher;
 
     /**
      * 포인트 조회
@@ -33,6 +38,9 @@ public class BalanceFacade {
     @Transactional
     public BalanceFacadeDTO chargeBalance(BalanceFacadeDTO balanceFacadeDTO) {
         UserDomain userDomain = balanceService.findBalanceById(balanceFacadeDTO.userId());
-        return BalanceFacadeMapper.toBalanceFacadeDTO(balanceService.updateBalance(userDomain.withBalance(userDomain.balance() + balanceFacadeDTO.amount())));
+        BalanceFacadeDTO resultDto = BalanceFacadeMapper.toBalanceFacadeDTO(balanceService.updateBalance(userDomain.withBalance(userDomain.balance() + balanceFacadeDTO.amount())));
+        //이벤트로 히스토리 처리
+        balanceEventPublisher.success(new BalanceSuccessEvent(resultDto.userId(), resultDto.amount(), BalanceTransactionType.CHARGE, System.currentTimeMillis()));
+        return resultDto;
     }
 }
