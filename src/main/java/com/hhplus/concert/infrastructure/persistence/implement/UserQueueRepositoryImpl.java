@@ -1,47 +1,52 @@
 package com.hhplus.concert.infrastructure.persistence.implement;
 
-import com.hhplus.concert.business.constant.QueueStatusType;
 import com.hhplus.concert.business.domain.QueueDomain;
 import com.hhplus.concert.business.repository.UserQueueRepository;
-import com.hhplus.concert.infrastructure.persistence.dataaccess.UserQueueJpaRepository;
-import com.hhplus.concert.infrastructure.persistence.mapper.QueueEntityMapper;
+import com.hhplus.concert.infrastructure.persistence.dataaccess.redis.UserQueueRedisRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
 public class UserQueueRepositoryImpl implements UserQueueRepository {
 
-    private final UserQueueJpaRepository jpaRepository;
+    private final UserQueueRedisRepository repository;
+
 
     @Override
-    public QueueDomain findByQueueNumber(Long queueNumber) {
-        return QueueEntityMapper.toQueueDomain(jpaRepository.findById(queueNumber));
+    public List<QueueDomain> getActiveQueues(String key) {
+        List<QueueDomain> queues = new ArrayList<>();
+        repository.getActiveQueues().members(key).forEach(queue -> {
+            queues.add(new QueueDomain(null, null, queue.toString()));
+        });
+        return queues;
     }
 
     @Override
-    public QueueDomain insert(QueueDomain queueDomain) {
-        return QueueEntityMapper.toQueueDomain(jpaRepository.save(QueueEntityMapper.toQueueEntity(queueDomain)));
+    public void insertActiveQueue(String key, String value) {
+        repository.insertActiveQueue(key, value);
     }
 
     @Override
-    public Long countByStatus(QueueStatusType status) {
-        return jpaRepository.countByStatus(status);
+    public Long getUserQueueCount(String key, String token) {
+        return repository.getUserQueueCount(key, token);
     }
 
     @Override
-    public QueueDomain update(QueueDomain queueDomain) {
-        return QueueEntityMapper.toQueueDomain(jpaRepository.save(QueueEntityMapper.toQueueEntity(queueDomain)));
+    public void insertWaitQueue(String key, String token, Long currentTime) {
+        repository.insertWaitQueue(key, token, currentTime);
     }
 
     @Override
-    public Long countByQueueNumberLessThanEqualAndStatusEquals(Long queueNumber, QueueStatusType status) {
-        return jpaRepository.countByQueueNumberLessThanEqualAndStatusEquals(queueNumber, status);
+    public void deleteWaitQueue(String key, String token) {
+        repository.deleteWaitQueue(key, token);
     }
 
     @Override
-    public Long expiredQueue(QueueStatusType status) {
-        return jpaRepository.expiredQueue(status).longValue();
+    public void deleteActiveQueue(String key, String token) {
+        repository.deleteActiveQueue(key, token);
     }
-
 }

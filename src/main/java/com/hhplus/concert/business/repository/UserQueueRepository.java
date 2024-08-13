@@ -1,19 +1,20 @@
 package com.hhplus.concert.business.repository;
 
-import com.hhplus.concert.business.constant.QueueStatusType;
 import com.hhplus.concert.business.domain.QueueDomain;
+
+import java.util.List;
 
 public interface UserQueueRepository {
 
-    QueueDomain findByQueueNumber(Long queueNumber);
+    List<QueueDomain> getActiveQueues(String key);
 
-    QueueDomain insert(QueueDomain queueDomain);
+    void insertActiveQueue(String key, String value);
 
-    Long countByStatus(QueueStatusType status);
+    Long getUserQueueCount(String key, String token);
 
-    QueueDomain update(QueueDomain queueDomain);
+    void insertWaitQueue(String key, String token, Long currentTime);
 
-    Long countByQueueNumberLessThanEqualAndStatusEquals(Long queueNumber, QueueStatusType status);
+    void deleteWaitQueue(String key, String token);
 
-    Long expiredQueue(QueueStatusType status);
+    void deleteActiveQueue(String key, String token);
 }

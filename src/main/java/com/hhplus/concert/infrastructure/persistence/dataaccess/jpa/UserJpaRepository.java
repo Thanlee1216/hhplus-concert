@@ -1,4 +1,4 @@
-package com.hhplus.concert.infrastructure.persistence.dataaccess;
+package com.hhplus.concert.infrastructure.persistence.dataaccess.jpa;
 
 import com.hhplus.concert.infrastructure.entity.UsersEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

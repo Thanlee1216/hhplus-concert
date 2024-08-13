@@ -35,7 +35,7 @@ public class TicketEntity {
     private String concertOptionName;
 
     @Column(name = "concert_date")
-    private Timestamp concertDate;
+    private Long concertDate;
 
     @Column(name = "seat_id")
     private Long seatId;
@@ -47,7 +47,7 @@ public class TicketEntity {
     private TicketStatusType status;
 
     public TicketEntity() {}
-    public TicketEntity(Long ticketId, Long userId, Long reservationId, Long concertId, String concertName, Long concertOptionId, Timestamp concertDate, Long seatId, String seatNum, TicketStatusType status) {
+    public TicketEntity(Long ticketId, Long userId, Long reservationId, Long concertId, String concertName, Long concertOptionId, Long concertDate, Long seatId, String seatNum, TicketStatusType status) {
         this.ticket_Id = ticketId;
         this.userId = userId;
         this.reservationId = reservationId;

@@ -3,8 +3,6 @@ package com.hhplus.concert.infrastructure.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Timestamp;
-
 @Entity
 @Table(name = "concert_option")
 @Data
@@ -22,11 +20,28 @@ public class ConcertOptionEntity {
     private String concertOptionName;
 
     @Column(name = "concert_date")
-    private Timestamp concertDate;
+    private Long concertDate;
 
     @Column(name = "concert_reservation_date")
-    private Timestamp concertReservationDate;
+    private Long concertReservationDate;
 
     @Column(name = "del_yn")
     private String delYn;
+
+    public ConcertOptionEntity() {}
+    public ConcertOptionEntity(Long concertId, String concertOptionName, Long concertDate, Long concertReservationDate, String delYn) {
+        this.concertId = concertId;
+        this.concertOptionName = concertOptionName;
+        this.concertDate = concertDate;
+        this.concertReservationDate = concertReservationDate;
+        this.delYn = delYn;
+    }
+    public ConcertOptionEntity(Long concertOptionId, Long concertId, String concertOptionName, Long concertDate, Long concertReservationDate, String delYn) {
+        this.concertOptionId = concertOptionId;
+        this.concertId = concertId;
+        this.concertOptionName = concertOptionName;
+        this.concertDate = concertDate;
+        this.concertReservationDate = concertReservationDate;
+        this.delYn = delYn;
+    }
 }

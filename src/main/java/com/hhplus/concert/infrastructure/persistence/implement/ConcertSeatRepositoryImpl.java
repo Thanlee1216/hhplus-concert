@@ -2,7 +2,7 @@ package com.hhplus.concert.infrastructure.persistence.implement;
 
 import com.hhplus.concert.business.domain.ConcertSeatDomain;
 import com.hhplus.concert.business.repository.ConcertSeatRepository;
-import com.hhplus.concert.infrastructure.persistence.dataaccess.ConcertSeatJpaRepository;
+import com.hhplus.concert.infrastructure.persistence.dataaccess.jpa.ConcertSeatJpaRepository;
 import com.hhplus.concert.infrastructure.persistence.mapper.ConcertSeatEntityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

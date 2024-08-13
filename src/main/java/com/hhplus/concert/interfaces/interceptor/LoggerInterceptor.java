@@ -1,5 +1,6 @@
 package com.hhplus.concert.interfaces.interceptor;
 
+import com.hhplus.concert.application.facade.QueueFacade;
 import com.hhplus.concert.application.facade.TokenFacade;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,7 +16,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    TokenFacade tokenFacade;
+    QueueFacade queueFacade;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -23,7 +24,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
         logger.info(" Request URI \t:  " + request.getRequestURI());
         logger.info(" Servlet URL \t:  " + request.getRequestURL());
 
-        return tokenFacade.validateToken(request.getHeader(HttpHeaders.AUTHORIZATION));
+        return queueFacade.checkActiveToken(request.getHeader(HttpHeaders.AUTHORIZATION));
     }
 
     @Override

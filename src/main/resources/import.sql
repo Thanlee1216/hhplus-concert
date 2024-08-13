@@ -4,15 +4,15 @@ INSERT INTO concert(concert_name, del_yn) VALUES('싸이의 흠뻑쇼', 'N');
 INSERT INTO concert(concert_name, del_yn) VALUES('아이유 콘서트', 'N');
 INSERT INTO concert(concert_name, del_yn) VALUES('성시경 콘서트', 'N');
 
-INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(1, '시즌 1', DATEADD('MONTH', 1, CURRENT_TIMESTAMP()), CURRENT_TIMESTAMP(), 'N');
-INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(1, '시즌 2', DATEADD('MONTH', 2, CURRENT_TIMESTAMP()), CURRENT_TIMESTAMP(), 'N');
-INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(1, '시즌 3', DATEADD('MONTH', 3, CURRENT_TIMESTAMP()), CURRENT_TIMESTAMP(), 'N');
-INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(2, 'one', DATEADD('MONTH', 4, CURRENT_TIMESTAMP()), CURRENT_TIMESTAMP(), 'N');
-INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(2, 'two', DATEADD('MONTH', 5, CURRENT_TIMESTAMP()), CURRENT_TIMESTAMP(), 'N');
-INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(2, 'three', DATEADD('MONTH', 6, CURRENT_TIMESTAMP()), CURRENT_TIMESTAMP(), 'N');
-INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(3, 'one', DATEADD('MONTH', 7, CURRENT_TIMESTAMP()), CURRENT_TIMESTAMP(), 'N');
-INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(3, 'two', DATEADD('MONTH', 8, CURRENT_TIMESTAMP()), CURRENT_TIMESTAMP(), 'N');
-INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(4, 'three', DATEADD('MONTH', 9, CURRENT_TIMESTAMP()), CURRENT_TIMESTAMP(), 'N');
+INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(1, '시즌 1', UNIX_TIMESTAMP(TIMESTAMPADD(MONTH, 1, UTC_TIMESTAMP())) * 1000, UNIX_TIMESTAMP(UTC_TIMESTAMP()) * 1000, 'N');
+INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(1, '시즌 2', UNIX_TIMESTAMP(TIMESTAMPADD(MONTH, 2, UTC_TIMESTAMP())) * 1000, UNIX_TIMESTAMP(UTC_TIMESTAMP()) * 1000, 'N');
+INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(1, '시즌 3', UNIX_TIMESTAMP(TIMESTAMPADD(MONTH, 3, UTC_TIMESTAMP())) * 1000, UNIX_TIMESTAMP(UTC_TIMESTAMP()) * 1000, 'N');
+INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(2, 'one', UNIX_TIMESTAMP(TIMESTAMPADD(MONTH, 4, UTC_TIMESTAMP())) * 1000, UNIX_TIMESTAMP(UTC_TIMESTAMP()) * 1000, 'N');
+INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(2, 'two', UNIX_TIMESTAMP(TIMESTAMPADD(MONTH, 5, UTC_TIMESTAMP())) * 1000, UNIX_TIMESTAMP(UTC_TIMESTAMP()) * 1000, 'N');
+INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(2, 'three', UNIX_TIMESTAMP(TIMESTAMPADD(MONTH, 6, UTC_TIMESTAMP())) * 1000, UNIX_TIMESTAMP(UTC_TIMESTAMP()) * 1000, 'N');
+INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(3, 'one', UNIX_TIMESTAMP(TIMESTAMPADD(MONTH, 7, UTC_TIMESTAMP())) * 1000, UNIX_TIMESTAMP(UTC_TIMESTAMP()) * 1000, 'N');
+INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(3, 'two', UNIX_TIMESTAMP(TIMESTAMPADD(MONTH, 8, UTC_TIMESTAMP())) * 1000, UNIX_TIMESTAMP(UTC_TIMESTAMP()) * 1000, 'N');
+INSERT INTO concert_option(concert_id, concert_option_name, concert_date, concert_reservation_date, del_yn) VALUES(4, 'three', UNIX_TIMESTAMP(TIMESTAMPADD(MONTH, 9, UTC_TIMESTAMP())) * 1000, UNIX_TIMESTAMP(UTC_TIMESTAMP()) * 1000, 'N');
 
 INSERT INTO concert_seat(concert_id, concert_option_id, seat_num, seat_price, seat_status) VALUES (1, 1, 'A1', 50000, 'WAIT');
 INSERT INTO concert_seat(concert_id, concert_option_id, seat_num, seat_price, seat_status) VALUES (1, 1, 'A2', 50000, 'WAIT');

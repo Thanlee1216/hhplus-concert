@@ -1,4 +1,4 @@
-package com.hhplus.concert.infrastructure.persistence.dataaccess;
+package com.hhplus.concert.infrastructure.persistence.dataaccess.jpa;
 
 import com.hhplus.concert.business.constant.QueueStatusType;
 import com.hhplus.concert.infrastructure.entity.UserQueueEntity;
