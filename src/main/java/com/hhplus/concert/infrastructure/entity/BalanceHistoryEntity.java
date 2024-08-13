@@ -27,5 +27,13 @@ public class BalanceHistoryEntity {
     private BalanceTransactionType transactionType;
 
     @Column(name = "transaction_date")
-    private Timestamp transactionDate;
+    private Long transactionDate;
+
+    public BalanceHistoryEntity() {}
+    public BalanceHistoryEntity(Long userId, Long amount, BalanceTransactionType transactionType, Long transactionDate) {
+        this.userId = userId;
+        this.amount = amount;
+        this.transactionType = transactionType;
+        this.transactionDate = transactionDate;
+    }
 }
