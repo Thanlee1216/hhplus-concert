@@ -5,4 +5,6 @@ import com.hhplus.concert.business.domain.BalanceHistoryDomain;
 public interface BalanceHistoryRepository {
 
     void insertBalanceHistory(BalanceHistoryDomain balanceHistoryDomain);
+
+    BalanceHistoryDomain findFirstByUserIdOrderByTransactionDateDesc(long userId);
 }

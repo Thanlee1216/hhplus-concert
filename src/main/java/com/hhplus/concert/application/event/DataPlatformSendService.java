@@ -2,16 +2,18 @@ package com.hhplus.concert.application.event;
 
 import com.hhplus.concert.business.domain.BalanceHistoryDomain;
 import com.hhplus.concert.business.service.BalanceService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class DataPlatformSendService {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    private BalanceService balanceService;
+    private final BalanceService balanceService;
 
     public void insertBalanceHistory(BalanceSuccessPayload payload) {
         try {

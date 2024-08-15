@@ -43,7 +43,7 @@ class BalanceFacadeIntegrationTest {
 
     @DisplayName("포인트 충전 통합 테스트")
     @Test
-    void chargeBalance() {
+    void chargeBalance() throws Exception {
         //given
         UserDomain userDomain = new UserDomain(1L, "1", "이태한", 1000L);
         userRepository.save(userDomain);

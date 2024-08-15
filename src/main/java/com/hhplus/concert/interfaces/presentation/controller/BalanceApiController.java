@@ -30,7 +30,7 @@ public class BalanceApiController {
      * @return
      */
     @PatchMapping("/charge")
-    public BalanceResponseDTO chargeBalance(@RequestBody BalanceRequestDTO requestDTO) {
+    public BalanceResponseDTO chargeBalance(@RequestBody BalanceRequestDTO requestDTO) throws Exception{
         return BalanceDtoMapper.toBalanceResponseDTO(balanceFacade.chargeBalance(BalanceDtoMapper.toBalanceFacadeDTO(requestDTO)));
     }
 
