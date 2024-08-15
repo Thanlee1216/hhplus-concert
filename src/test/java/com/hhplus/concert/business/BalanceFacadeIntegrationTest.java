@@ -1,6 +1,7 @@
 package com.hhplus.concert.business;
 
 import com.hhplus.concert.application.dto.BalanceFacadeDTO;
+import com.hhplus.concert.application.facade.BalanceFacade;
 import com.hhplus.concert.business.domain.UserDomain;
 import com.hhplus.concert.business.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;

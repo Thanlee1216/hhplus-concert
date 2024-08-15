@@ -1,5 +1,6 @@
 package com.hhplus.concert.interfaces.presentation.controller;
 
+import com.hhplus.concert.application.facade.BalanceFacade;
 import com.hhplus.concert.interfaces.presentation.dto.balance.request.BalanceRequestDTO;
 import com.hhplus.concert.interfaces.presentation.dto.balance.response.BalanceResponseDTO;
 import com.hhplus.concert.interfaces.presentation.mapper.BalanceDtoMapper;
