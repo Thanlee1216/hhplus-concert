@@ -23,20 +23,7 @@ spring:
       host: localhost
       port: 6379
 
-  kafka:
-    bootstrap-servers: localhost:9100 # 카프카 서버 주소
-    consumer:
-#      group-id: balance-group
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.trusted.packages: "*"
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    admin:
-      auto-create-topics: true
+
 
 
 
