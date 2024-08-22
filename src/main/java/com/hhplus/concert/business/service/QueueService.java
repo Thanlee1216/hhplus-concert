@@ -14,7 +14,7 @@ public class QueueService {
     //한번에 처리 가능한 유입량
     //요구사항에 50좌석으로 제한되어 있기 때문에 적은 Limit로 설정
     private static final Long QUEUE_LIMIT = 5L;
-    private static final Long ACTIVE_LIMIT_TIME = 600000L;
+    private static final Long ACTIVE_LIMIT_TIME = 30000L;
 
     private static final String ACTIVE_TOKEN_KEY = "activeToken";
     private static final String WAIT_TOKEN_KEY = "waitToken";
