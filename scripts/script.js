@@ -1,5 +1,3 @@
-// script.js (k6 테스트용)
-
 import http from 'k6/http';
 import { sleep } from 'k6';
 
